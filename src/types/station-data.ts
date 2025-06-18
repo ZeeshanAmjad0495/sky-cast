@@ -1,12 +1,12 @@
 interface StationData {
+  contribution: number;
   distance: number;
+  id: string;
   latitude: number;
   longitude: number;
-  useCount: number;
-  id: string;
   name: string;
   quality: number;
-  contribution: number;
+  useCount: number;
 }
 
 export default StationData;

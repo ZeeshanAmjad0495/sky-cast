@@ -1,28 +1,29 @@
-import swagger from '@fastify/swagger';
-import swaggerUI from '@fastify/swagger-ui';
-import { FastifyInstance } from 'fastify';
-import env from "../config/env"
+import swagger from "@fastify/swagger";
+import swaggerUI from "@fastify/swagger-ui";
+import { FastifyInstance } from "fastify";
+
+import environment from "../config/environment";
 
 async function registerSwagger(server: FastifyInstance) {
   await server.register(swagger, {
     openapi: {
       info: {
-        title: 'Weather API',
-        description: 'API for fetching weather data by city and unit group',
-        version: '1.0.0',
+        description: "API for fetching weather data by city and unit group",
+        title: "Weather API",
+        version: "1.0.0",
       },
       servers: [
         {
-          url: `${env.LOCAL_HOST}:${env.PORT}`,
+          url: `${environment.LOCAL_HOST}:${environment.PORT}`,
         },
       ],
     },
   });
 
   await server.register(swaggerUI, {
-    routePrefix: '/docs',
+    routePrefix: "/docs",
     uiConfig: {
-      docExpansion: 'full',
+      docExpansion: "full",
     },
   });
 }

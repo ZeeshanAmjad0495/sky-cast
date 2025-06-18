@@ -1,20 +1,20 @@
-import CurrentConditions from './current-conditions';
-import DayData from './day-data';
-import StationData from './station-data';
+import CurrentConditions from "./current-conditions";
+import DayData from "./day-data";
+import StationData from "./station-data";
 
 interface WeatherResponse {
-  queryCost: number;
+  address: string;
+  alerts?: any[];
+  currentConditions: CurrentConditions;
+  days: DayData[];
+  description: string;
   latitude: number;
   longitude: number;
+  queryCost: number;
   resolvedAddress: string;
-  address: string;
+  stations: Record<string, StationData>;
   timezone: string;
   tzoffset: number;
-  description: string;
-  days: DayData[];
-  alerts?: any[];
-  stations: Record<string, StationData>;
-  currentConditions: CurrentConditions;
 }
 
 export default WeatherResponse;

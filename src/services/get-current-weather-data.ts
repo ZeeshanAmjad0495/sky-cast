@@ -1,19 +1,15 @@
-import type DayData from '../types/day-data';
-import type UnitGroup from '../constants/unit-group';
-import type WeatherResponse from '../types/weather-response';
+import axios from "axios";
 
-import axios from 'axios';
-import env from '../config/env';
-import findCurrentWeather from '../utilities/find-current-weather';
-import getCachedWeather from '../cache/get-cached-weather';
-import cacheWeather from '../cache/cache-weather';
-import CurrentConditions from '../types/current-conditions';
-import buildRedisKey from '../utilities/build-redis-key';
-import buildWeatherUrl from '../utilities/build-weather-url';
-import WeatherUrlParams from '../types/weather-url-params';
-
-const API_KEY = env.API_KEY;
-const BASE_URL = env.BASE_URL;
+import cacheWeather from "../cache/cache-weather";
+import getCachedWeather from "../cache/get-cached-weather";
+import type UnitGroup from "../constants/unit-group";
+import CurrentConditions from "../types/current-conditions";
+import type DayData from "../types/day-data";
+import type WeatherResponse from "../types/weather-response";
+import WeatherUrlParameters from "../types/weather-url-parameters";
+import buildRedisKey from "../utilities/build-redis-key";
+import buildWeatherUrl from "../utilities/build-weather-url";
+import findCurrentWeather from "../utilities/find-current-weather";
 
 async function getCurrentWeatherData(
   city: string,
@@ -28,19 +24,19 @@ async function getCurrentWeatherData(
     return cachedWeather;
   }
 
-  const weatherUrlParams: WeatherUrlParams = {
+  const weatherUrlParameters: Omit<WeatherUrlParameters, "key"> = {
     city,
+    contentType: "json",
     unitGroup,
-    contentType: 'json',
   };
 
-  const url = buildWeatherUrl({ baseUrl: BASE_URL, apiKey: API_KEY })(weatherUrlParams);
+  const url = buildWeatherUrl(weatherUrlParameters);
 
   try {
     const response = await axios.get(url);
     const { days, currentConditions }: WeatherResponse = response.data;
 
-    if (!days.length) {
+    if (days.length === 0) {
       await cacheWeather(key, currentConditions);
       return currentConditions;
     }
@@ -55,11 +51,10 @@ async function getCurrentWeatherData(
     await cacheWeather(key, currentWeather);
     return currentWeather;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(`HTTP ${error.response?.status}: ${error.message}`);
-    } else {
-      throw error;
-    }
+    const error_ = axios.isAxiosError(error)
+      ? new Error(`HTTP ${error.response?.status}: ${error.message}`)
+      : error;
+    throw error_;
   }
 }
 

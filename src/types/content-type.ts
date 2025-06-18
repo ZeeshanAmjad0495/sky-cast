@@ -1,3 +1,3 @@
-type ContentType = 'json' | 'csv';
+type ContentType = "csv" | "json";
 
 export default ContentType;

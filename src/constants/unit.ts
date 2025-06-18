@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 enum Unit {
-  US = '°F',
-  METRIC = '°C',
-  UK = '°C',
+  METRIC = "°C",
+  UK = "°C",
+  US = "°F",
 }
 
 export default Unit;

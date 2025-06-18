@@ -1,4 +1,4 @@
-import Time from '../constants/time';
+import Time from "../constants/time";
 
 const getSecondsUntilEndOfDay = () => {
   const now = new Date();

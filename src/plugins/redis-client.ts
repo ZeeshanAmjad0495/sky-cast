@@ -1,8 +1,9 @@
-import { createClient } from 'redis';
-import env from "../config/env"
+import { createClient } from "redis";
+
+import environment from "../config/environment";
 
 const redisClient = createClient({
-  url: env.REDIS_URL,
+  url: environment.REDIS_URL,
 });
 
 export async function connectRedis() {

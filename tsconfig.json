@@ -36,6 +36,6 @@
     "skipLibCheck": true
   },
   "compileOnSave": true,
-  "include": ["src", "__tests__", "env.d.ts"],
+  "include": ["src", "__tests__","eslint.config.js"],
   "exclude": ["dist", "node_modules"]
 }

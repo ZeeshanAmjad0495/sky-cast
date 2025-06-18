@@ -1,29 +1,29 @@
 interface HourData {
+  cloudcover: number;
+  conditions: string;
   datetime: string;
   datetimeEpoch: number;
-  temp: number;
+  dew: number;
   feelslike: number;
   humidity: number;
-  dew: number;
+  icon: string;
   precip: number;
   precipprob: number;
+  preciptype?: string[];
+  pressure: number;
+  severerisk: number;
   snow: number;
   snowdepth: number;
-  preciptype?: string[];
+  solarenergy: number;
+  solarradiation: number;
+  source: string;
+  stations?: string[];
+  temp: number;
+  uvindex: number;
+  visibility: number;
+  winddir: number;
   windgust?: number;
   windspeed: number;
-  winddir: number;
-  pressure: number;
-  visibility: number;
-  cloudcover: number;
-  solarradiation: number;
-  solarenergy: number;
-  uvindex: number;
-  severerisk: number;
-  conditions: string;
-  icon: string;
-  stations?: string[];
-  source: string;
 }
 
 export default HourData;

@@ -1,33 +1,33 @@
 interface CurrentConditions {
+  cloudcover: number;
+  conditions: string;
   datetime: string;
   datetimeEpoch: number;
-  temp: number;
+  dew: number;
   feelslike: number;
   humidity: number;
-  dew: number;
+  icon: string;
+  moonphase: number;
   precip?: number;
   precipprob: number;
+  preciptype?: string[];
+  pressure: number;
   snow: number;
   snowdepth: number;
-  preciptype?: string[];
-  windgust?: number;
-  windspeed: number;
-  winddir: number;
-  pressure: number;
-  visibility: number;
-  cloudcover: number;
-  solarradiation: number;
   solarenergy: number;
-  uvindex: number;
-  conditions: string;
-  icon: string;
-  stations?: string[];
+  solarradiation: number;
   source: string;
+  stations?: string[];
   sunrise: string;
   sunriseEpoch: number;
   sunset: string;
   sunsetEpoch: number;
-  moonphase: number;
+  temp: number;
+  uvindex: number;
+  visibility: number;
+  winddir: number;
+  windgust?: number;
+  windspeed: number;
 }
 
 export default CurrentConditions;

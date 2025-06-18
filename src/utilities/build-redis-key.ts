@@ -1,7 +1,7 @@
 const buildRedisKey = (city: string, date: string) => {
-  const key = `weather:${city.toLowerCase().replace(/\s+/g, '-')}:`;
+  const key = `weather:${city.toLowerCase().replaceAll(/\s+/g, "-")}:`;
 
-  return key.concat(date);
+  return `${key}${date}`;
 };
 
 export default buildRedisKey;

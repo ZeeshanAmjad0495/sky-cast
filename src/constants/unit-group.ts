@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 enum UnitGroup {
-  US = 'us',
-  METRIC = 'metric',
-  UK = 'uk',
-  BASE = 'base'
+  BASE = "base",
+  METRIC = "metric",
+  UK = "uk",
+  US = "us",
 }
 
-export default UnitGroup
+export default UnitGroup;

@@ -1,16 +1,16 @@
-import envSchema from 'env-schema';
-import { Type, Static } from '@sinclair/typebox';
+import { Static, Type } from "@sinclair/typebox";
+import envSchema from "env-schema";
 
 const schema = Type.Object({
   API_KEY: Type.String(),
   BASE_URL: Type.String(),
 });
 
-type WeatherEnv = Static<typeof schema>;
+type WeatherEnvironment = Static<typeof schema>;
 
-const weatherConfig = envSchema<WeatherEnv>({
-  schema,
+const weatherConfig = envSchema<WeatherEnvironment>({
   dotenv: false,
+  schema,
 });
 
 export default weatherConfig;

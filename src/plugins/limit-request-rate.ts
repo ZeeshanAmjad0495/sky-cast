@@ -1,22 +1,23 @@
-import rateLimit from '@fastify/rate-limit';
-import { FastifyInstance } from 'fastify';
-import fastifyRedis from '@fastify/redis';
-import env from "../config/env";
+import rateLimit from "@fastify/rate-limit";
+import fastifyRedis from "@fastify/redis";
+import { FastifyInstance } from "fastify";
+
+import environment from "../config/environment";
 
 async function limitRequestRate(server: FastifyInstance) {
-  await server.register(fastifyRedis, { url: env.REDIS_URL });
+  await server.register(fastifyRedis, { url: environment.REDIS_URL });
 
   await server.register(rateLimit, {
-    max: 20,
-    timeWindow: '1 hour',
-    redis: server.redis,
-    errorResponseBuilder: (_req, context) => {
+    errorResponseBuilder: (_request, context) => {
       return {
-        statusCode: 429,
-        error: 'Too Many Requests',
+        error: "Too Many Requests",
         message: `Rate limit exceeded: ${context.after}`,
+        statusCode: 429,
       };
     },
+    max: 20,
+    redis: server.redis,
+    timeWindow: "1 hour",
   });
 }
 

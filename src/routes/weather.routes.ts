@@ -1,26 +1,26 @@
-import { FastifyInstance } from 'fastify';
-import { Type } from '@sinclair/typebox';
-import fetchWeatherData from '../controllers/fetch-weather-data';
-import DayDataSchema from '../schemas/day-data-schema';
+import { Type } from "@sinclair/typebox";
+import { FastifyInstance } from "fastify";
+
+import fetchWeatherData from "../controllers/fetch-weather-data";
+import DayDataSchema from "../schemas/day-data-schema";
 
 async function registerWeatherRoutes(server: FastifyInstance) {
   server.get(
-    '/api/weather',
+    "/api/weather",
     {
       schema: {
-        summary: 'Get Weather Data',
-        description: 'Returns weather data for a given city and unit group',
+        description: "Returns weather data for a given city and unit group",
         querystring: {
-          type: 'object',
-          required: ['city'],
           properties: {
-            city: { type: 'string' },
+            city: { type: "string" },
             unitGroup: {
-              type: 'string',
-              enum: ['us', 'metric', 'uk'],
-              default: 'us',
+              default: "us",
+              enum: ["us", "metric", "uk"],
+              type: "string",
             },
           },
+          required: ["city"],
+          type: "object",
         },
         response: {
           200: DayDataSchema,
@@ -31,6 +31,7 @@ async function registerWeatherRoutes(server: FastifyInstance) {
             error: Type.String(),
           }),
         },
+        summary: "Get Weather Data",
       },
     },
     fetchWeatherData,
