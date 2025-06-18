@@ -89,7 +89,6 @@ export default defineConfig([
       ],
       "import/newline-after-import": ["error", { considerComments: true }],
 
-      "sort-keys": ["error", "asc", { caseSensitive: true, natural: true }],
       "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 0, maxBOF: 0 }],
       "prettier/prettier": "error",
 

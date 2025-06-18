@@ -1,6 +1,4 @@
-import dotenv from "dotenv-flow";
-
-dotenv.config();
+import "dotenv-flow/config";
 
 import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
@@ -22,12 +20,12 @@ if (!redisClient.isOpen) {
 const server = fastify({
   logger: {
     transport: {
+      target: "pino-pretty",
       options: {
-        ignore: "pid,hostname",
+        ignoreFields: "pid,hostname",
         singleLine: true,
         translateTime: "SYS:standard",
       },
-      target: "pino-pretty",
     },
   },
 });
